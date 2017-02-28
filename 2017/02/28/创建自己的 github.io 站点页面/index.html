@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="站点," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建自己的 github.io 站点页面">
+<meta property="og:url" content="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/index.html">
+<meta property="og:site_name" content="Kuang Caibao's Notes">
+<meta property="og:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
+<meta property="og:updated_time" content="2017-02-28T15:01:15.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="创建自己的 github.io 站点页面">
+<meta name="twitter:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/"/>
+
+
+
+
+
+  <title> 创建自己的 github.io 站点页面 | Kuang Caibao's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kuang Caibao's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">这就是一个马拉松</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kuang Caibao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kuang Caibao's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                创建自己的 github.io 站点页面
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-28T20:05:43+08:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工程文档/" itemprop="url" rel="index">
+                    <span itemprop="name">工程文档</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-为什么使用-github-io-提供的静态页面服务写-blog"><a href="#1-为什么使用-github-io-提供的静态页面服务写-blog" class="headerlink" title="1. 为什么使用 github.io 提供的静态页面服务写 blog"></a>1. 为什么使用 github.io 提供的静态页面服务写 blog</h1><p>  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 <code>blog</code> 系统，虽然可以记录 <code>blog</code>。因为托管在第三方，经常容易忘记，然后就没有然后了。<code>github.com</code> 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持<code>markdown</code> 语法记录，非常方便。 但是在 <code>github.com</code> 上查看自己的 <code>markdown</code> 文件内容，虽然渲染成了页面，显示也很友好，但是没有归档功能，查找其他不方便。</p>
+<p><code>github pages</code> 提供的是一个静态页面服务，<code>github.com</code> 上的每个开发者都有一个域名来使用它的静态网页服务，地址类似 <code>username.github.io</code>。免费域名，免费提供站点服务，非常方便，同时自己管理自己的内容。</p>
+<h1 id="2-使用-hexo-来创建一个-github-pages"><a href="#2-使用-hexo-来创建一个-github-pages" class="headerlink" title="2. 使用 hexo 来创建一个 github pages"></a>2. 使用 <code>hexo</code> 来创建一个 <code>github pages</code></h1><p><code>github pages</code> 官方推荐的主题是 <code>ruby</code> 实现的，使用起来看不懂。这里推荐一个 <code>hexo</code>，一个基于 <code>nodejs</code> 的工具。 使用起来还是比较方便的。</p>
+<p>这里假设你完成了一下的准备：</p>
+<ol>
+<li><p>系统安装了 <code>node</code>, <code>git</code></p>
+</li>
+<li><p>在 <code>github.com</code> 上创建了一个仓库 <code>username.github.io.git</code></p>
+</li>
+<li><p>在你的系统和 <code>github</code> 间建立了一个 <code>ssh</code> 通路</p>
+</li>
+</ol>
+<p>这时按照 <code>hexo</code> 的教程，来创建。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; npm install -g hexo-cli</div><div class="line">&gt; hexo init blog-test</div><div class="line">&gt; <span class="built_in">cd</span> blog-test</div><div class="line">&gt; hexo server</div></pre></td></tr></table></figure>
+<p>执行完这些命令后，你在本地启动了 <code>hexo server</code> 服务，可以在浏览器中输入地址查看内容。通过修改配置来设置你的站点的一些配置<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">参考官方文档</a>。这个配置最好和后面的主题一起看。</p>
+<p>在浏览器中输入本机测试地址，看到有个 <code>hello world</code> 的例子，到这里。你的 <code>hexo</code> 站点在本地可以正常运行了。下一步我们需要做什么？</p>
+<p><code>github pages</code> 是一个静态页面服务器，理解起来就是它提供的内容就是 <code>html</code> + <code>css</code> 这样的形式组织的页面。所以下一步，我们需要生成静态页面，然后发布到我们 <code>github.com</code> 对应的仓库中，执行下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; hexo generate</div><div class="line">&gt; hexo deploy</div></pre></td></tr></table></figure>
+<p>这里在 <code>deploy</code> 的过程中，我们需要配置我们 <code>git</code> 仓库的地址。配置文件 <code>_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">deploy:</div><div class="line">  type: git </div><div class="line">  repo: git@github.com:kuangcaibao/kuangcaibao.github.io.git</div></pre></td></tr></table></figure>
+<p>官方文档，推荐的是 <code>https</code> 这种协议的，使用这种协议 <code>git push</code> 的时候，会提醒用户名不存在，报错。</p>
+<p>我们换成 <code>ssh</code> 协议，也就是地址类似上方那种协议。但是有时也会报错，说没有权限操作远程仓库，这种情形也是昨天遇到的。查询下资料，试了换协议，重新生成 <code>ssh key</code> 等。最后发现是我的 <code>git for windows</code> 版本低了，有这个 <code>bug</code>，新的 <code>git for windows</code> 版本没有这个问题，果断升级后成功 <code>deploy</code> 了。</p>
+<p>到这里，可以在浏览器输入 <code>username.github.io</code>，来访问你的页面。如果有内容，到此配置都没有问题了。</p>
+<h1 id="3-将-hexo-的主题换为-next"><a href="#3-将-hexo-的主题换为-next" class="headerlink" title="3. 将 hexo 的主题换为 next"></a>3. 将 <code>hexo</code> 的主题换为 <code>next</code></h1><p><code>google</code> 一下 <code>hexo</code> 流行的主题，第一条推荐是 <code>hexo-theme-next</code>，就是用这个主题了。</p>
+<p><code>hexo</code> 主题存放路径 <code>/themes/[theme type]</code>，配置为文件 <code>_config.yml</code> 中的 <code>theme: [type]</code>。</p>
+<p>在这里，我们 <code>git clone</code> 主题 <code>hexo-theme-next</code> 的内容到对应的文件夹下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next.git themes/next</div></pre></td></tr></table></figure>
+<p>修改配置文件 <code>_config.yml</code> 中内容 <code>theme: next</code></p>
+<p>这个时候，重启服务器 <code>hexo server</code>，来查看效果。</p>
+<p><code>hexo-theme-next</code> 的配置，参考其<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">官方文档</a></p>
+<h1 id="4-多端同步我们的内容"><a href="#4-多端同步我们的内容" class="headerlink" title="4. 多端同步我们的内容"></a>4. 多端同步我们的内容</h1><p>前面介绍了几个概念：</p>
+<ol>
+<li><p><code>github pages</code> 是一个静态网页服务器，所以对应我们仓库中的文件内容都是一些静态 <code>html</code> <code>css</code> 文件。</p>
+</li>
+<li><p><code>hexo</code> 是使用模板来生成 <code>html</code> 页面，就是说，我们的内容其实是 <code>md</code> 格式的文件。</p>
+</li>
+</ol>
+<p>这样，使用命令 <code>hexo deploy</code> 只是将生成的静态页面文件 <code>push</code> 到了我们的仓库中。实际的源文件，没有处理。</p>
+<p>所以这里，我们需要把我们的源文件，就是工程文件也上传到 <code>github</code> 中。理解了这个过程，那么我们就好管理了，不管是再新建一个仓库，来存放这些文件。还是在 <code>github pages</code> 的那个仓库下建一个分支来存放文件，都行。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/站点/" rel="tag"># 站点</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Kuang Caibao" />
+          <p class="site-author-name" itemprop="name">Kuang Caibao</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个 Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-为什么使用-github-io-提供的静态页面服务写-blog"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么使用 github.io 提供的静态页面服务写 blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用-hexo-来创建一个-github-pages"><span class="nav-number">2.</span> <span class="nav-text">2. 使用 hexo 来创建一个 github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-将-hexo-的主题换为-next"><span class="nav-number">3.</span> <span class="nav-text">3. 将 hexo 的主题换为 next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-多端同步我们的内容"><span class="nav-number">4.</span> <span class="nav-text">4. 多端同步我们的内容</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kuang Caibao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
