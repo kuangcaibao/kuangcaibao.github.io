@@ -90,3 +90,15 @@ deploy:
 这样，使用命令 `hexo deploy` 只是将生成的静态页面文件 `push` 到了我们的仓库中。实际的源文件，没有处理。
 
 所以这里，我们需要把我们的源文件，就是工程文件也上传到 `github` 中。理解了这个过程，那么我们就好管理了，不管是再新建一个仓库，来存放这些文件。还是在 `github pages` 的那个仓库下建一个分支来存放文件，都行。
+
+# 5. hexo-theme-next 继承第三方服务
+
+## 5.1 评论系统
+
+这里选择 [官方文档](http://theme-next.iissnan.com/third-party-services.html#comment-system) 中推荐的 [多说](http://duoshuo.com/)。然后按照文档说明，注册信息和在站点配置文件中配置对应的内容就可以了。
+
+## 5.2 图片存储服务
+
+如果把 `blog` 中图片资源也放到 `github` 中，很容易把 `github` 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。
+
+在 [七牛](http://www.qiniu.com/) 上注册账号，开始操作，操作方式自行 `google`。
