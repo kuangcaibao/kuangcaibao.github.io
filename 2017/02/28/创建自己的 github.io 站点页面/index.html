@@ -80,7 +80,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="http://om52qmmoc.bkt.clouddn.com/Koala.jpg?v=5.1.0" />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/index.html">
 <meta property="og:site_name" content="Kuang Caibao's Notes">
 <meta property="og:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
-<meta property="og:updated_time" content="2017-02-28T15:01:15.778Z">
+<meta property="og:updated_time" content="2017-03-01T13:45:04.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建自己的 github.io 站点页面">
 <meta name="twitter:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
@@ -264,7 +264,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kuang Caibao">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://om52qmmoc.bkt.clouddn.com/Koala.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -331,6 +331,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/28/创建自己的 github.io 站点页面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -392,6 +402,9 @@
 </ol>
 <p>这样，使用命令 <code>hexo deploy</code> 只是将生成的静态页面文件 <code>push</code> 到了我们的仓库中。实际的源文件，没有处理。</p>
 <p>所以这里，我们需要把我们的源文件，就是工程文件也上传到 <code>github</code> 中。理解了这个过程，那么我们就好管理了，不管是再新建一个仓库，来存放这些文件。还是在 <code>github pages</code> 的那个仓库下建一个分支来存放文件，都行。</p>
+<h1 id="5-hexo-theme-next-继承第三方服务"><a href="#5-hexo-theme-next-继承第三方服务" class="headerlink" title="5. hexo-theme-next 继承第三方服务"></a>5. hexo-theme-next 继承第三方服务</h1><h2 id="5-1-评论系统"><a href="#5-1-评论系统" class="headerlink" title="5.1 评论系统"></a>5.1 评论系统</h2><p>这里选择 <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system" target="_blank" rel="external">官方文档</a> 中推荐的 <a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>。然后按照文档说明，注册信息和在站点配置文件中配置对应的内容就可以了。</p>
+<h2 id="5-2-图片存储服务"><a href="#5-2-图片存储服务" class="headerlink" title="5.2 图片存储服务"></a>5.2 图片存储服务</h2><p>如果把 <code>blog</code> 中图片资源也放到 <code>github</code> 中，很容易把 <code>github</code> 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。</p>
+<p>在 <a href="http://www.qiniu.com/" target="_blank" rel="external">七牛</a> 上注册账号，开始操作，操作方式自行 <code>google</code>。</p>
 
       
     </div>
@@ -446,6 +459,10 @@
           
   <div class="comments" id="comments">
     
+      <div class="ds-thread" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/"
+           data-title="创建自己的 github.io 站点页面" data-url="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/">
+      </div>
+    
   </div>
 
 
@@ -480,7 +497,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://om52qmmoc.bkt.clouddn.com/Koala.jpg"
                alt="Kuang Caibao" />
           <p class="site-author-name" itemprop="name">Kuang Caibao</p>
            
@@ -545,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-为什么使用-github-io-提供的静态页面服务写-blog"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么使用 github.io 提供的静态页面服务写 blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用-hexo-来创建一个-github-pages"><span class="nav-number">2.</span> <span class="nav-text">2. 使用 hexo 来创建一个 github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-将-hexo-的主题换为-next"><span class="nav-number">3.</span> <span class="nav-text">3. 将 hexo 的主题换为 next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-多端同步我们的内容"><span class="nav-number">4.</span> <span class="nav-text">4. 多端同步我们的内容</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-为什么使用-github-io-提供的静态页面服务写-blog"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么使用 github.io 提供的静态页面服务写 blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用-hexo-来创建一个-github-pages"><span class="nav-number">2.</span> <span class="nav-text">2. 使用 hexo 来创建一个 github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-将-hexo-的主题换为-next"><span class="nav-number">3.</span> <span class="nav-text">3. 将 hexo 的主题换为 next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-多端同步我们的内容"><span class="nav-number">4.</span> <span class="nav-text">4. 多端同步我们的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-hexo-theme-next-继承第三方服务"><span class="nav-number">5.</span> <span class="nav-text">5. hexo-theme-next 继承第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-评论系统"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 评论系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-图片存储服务"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 图片存储服务</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -670,32 +687,39 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"kuangcaibao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
-	
 
 
 
 
 
-  
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 
