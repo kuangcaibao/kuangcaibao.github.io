@@ -102,3 +102,19 @@ deploy:
 如果把 `blog` 中图片资源也放到 `github` 中，很容易把 `github` 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。
 
 在 [七牛](http://www.qiniu.com/) 上注册账号，开始操作，操作方式自行 `google`。
+
+
+# 6. Q & A
+
+## 6.1 next 主题修改配置的同步问题
+
+在使用 `hexo` 的时候引入 `next` 主题，这个是从另外一个项目中 `clone` 过来的。我们修改主题配置文件的时候，在根目录下执行 `git status` 会检查到 `themes/next` 下有变化，但是一套 `git` 操作下来，会发现我们的远程仓库中 `themes/next` 下的文件夹是空的，没有同步过去。
+
+我们手动来添加我们修改的文件。
+
+```bash
+> git add themes/next/_config.yml
+fatal: Pathspec 'themes/next/_config.yml' is in submodule 'themes/next'
+```
+
+看看 `git` 中 `submodule` 是个概念，[解释](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
