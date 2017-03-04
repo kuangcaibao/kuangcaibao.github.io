@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git,工具," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://om52qmmoc.bkt.clouddn.com/Koala.jpg?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 前言在做 github pages 工程多端同步的时候，我们在我们的主工程下面 clone 了一个子工程，如 themes/next。当使用 git push origin master 提交我们的 blog 内容修改的时候，可以在远程仓库中 themes/next 下的内容为空，没有同步。
+网上解释这个现象的关键词 git submodule, 官方的解释说明，点击这里
+2. 测试 git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git submodule 测试">
+<meta property="og:url" content="http://kuangcaibao.github.io/2017/03/04/git-submodule-测试/index.html">
+<meta property="og:site_name" content="Kuang Caibao's Notes">
+<meta property="og:description" content="1. 前言在做 github pages 工程多端同步的时候，我们在我们的主工程下面 clone 了一个子工程，如 themes/next。当使用 git push origin master 提交我们的 blog 内容修改的时候，可以在远程仓库中 themes/next 下的内容为空，没有同步。
+网上解释这个现象的关键词 git submodule, 官方的解释说明，点击这里
+2. 测试 git">
+<meta property="og:updated_time" content="2017-03-04T03:08:00.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git submodule 测试">
+<meta name="twitter:description" content="1. 前言在做 github pages 工程多端同步的时候，我们在我们的主工程下面 clone 了一个子工程，如 themes/next。当使用 git push origin master 提交我们的 blog 内容修改的时候，可以在远程仓库中 themes/next 下的内容为空，没有同步。
+网上解释这个现象的关键词 git submodule, 官方的解释说明，点击这里
+2. 测试 git">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kuangcaibao.github.io/2017/03/04/git-submodule-测试/"/>
+
+
+
+
+
+  <title> git submodule 测试 | Kuang Caibao's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kuang Caibao's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">这就是一个马拉松</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kuangcaibao.github.io/2017/03/04/git-submodule-测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kuang Caibao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://om52qmmoc.bkt.clouddn.com/Koala.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kuang Caibao's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git submodule 测试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-04T10:17:29+08:00">
+                2017-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工程文档/" itemprop="url" rel="index">
+                    <span itemprop="name">工程文档</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/04/git-submodule-测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/04/git-submodule-测试/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>在做 <code>github pages</code> 工程多端同步的时候，我们在我们的主工程下面 <code>clone</code> 了一个子工程，如 <code>themes/next</code>。当使用 <code>git push origin master</code> 提交我们的 <code>blog</code> 内容修改的时候，可以在远程仓库中 <code>themes/next</code> 下的内容为空，没有同步。</p>
+<p>网上解释这个现象的关键词 <code>git submodule</code>, 官方的解释说明，<a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="external">点击这里</a></p>
+<h1 id="2-测试-git-submodule-工作现象"><a href="#2-测试-git-submodule-工作现象" class="headerlink" title="2. 测试 git submodule 工作现象"></a>2. 测试 git submodule 工作现象</h1><h2 id="2-1-裸仓库和一般仓库的区别"><a href="#2-1-裸仓库和一般仓库的区别" class="headerlink" title="2.1 裸仓库和一般仓库的区别"></a>2.1 裸仓库和一般仓库的区别</h2><p>裸仓库和一般的 <code>git</code> 仓库有什么区别？主要有下面2点：</p>
+<ol>
+<li><p>裸仓库没有工作区，一般 <code>git</code> 仓库有工作区</p>
+</li>
+<li><p>执行 <code>git push</code> 命令，可以推送修改到裸仓库，而一般的仓库不能被推送</p>
+</li>
+</ol>
+<p>说到推送，向一般的 <code>git</code> 仓库执行 <code>git push</code>，会提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">! [remote rejected] master -&gt; master (branch is currently checked out)</div><div class="line">error: failed to push some refs to &apos;E:/git-submodule-test/main/&apos;</div></pre></td></tr></table></figure>
+<p>看到这里就理解了2者区别。</p>
+<h2 id="2-2-创建2个裸仓库，并向仓库推送修改"><a href="#2-2-创建2个裸仓库，并向仓库推送修改" class="headerlink" title="2.2 创建2个裸仓库，并向仓库推送修改"></a>2.2 创建2个裸仓库，并向仓库推送修改</h2><p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ mkdir main</div><div class="line">$ <span class="built_in">cd</span> main</div><div class="line">$ git init</div><div class="line">$ <span class="built_in">cd</span> ../</div><div class="line">$ git <span class="built_in">clone</span> --bare main main.git</div><div class="line"></div><div class="line">$ mkdir sub</div><div class="line">$ <span class="built_in">cd</span> sub</div><div class="line">$ git init</div><div class="line">$ <span class="built_in">cd</span> ../</div><div class="line">$ git <span class="built_in">clone</span> --bare sub sub.git</div></pre></td></tr></table></figure>
+<p>至此，我们成功建立了2个裸仓库：<code>main.git</code> 和 <code>sub.git</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ rm -rf main</div><div class="line">$ rm -rf sub</div><div class="line">$ git <span class="built_in">clone</span> main.git main</div><div class="line">$ git <span class="built_in">clone</span> sub.git sub</div></pre></td></tr></table></figure>
+<p><code>clone</code> 2个一般仓库，并添加内容，提交到对应的裸仓库中。</p>
+<h2 id="2-3-从主仓库开始"><a href="#2-3-从主仓库开始" class="headerlink" title="2.3 从主仓库开始"></a>2.3 从主仓库开始</h2><p>我们现在有2个仓库，下面开始我们一般的工作流程：</p>
+<ol>
+<li><p><code>clone</code> 一个仓库代码到本地</p>
+</li>
+<li><p>在这个仓库下面，再 <code>clone</code> 一个仓库代码</p>
+</li>
+</ol>
+<p>对应的执行代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> main.git ztest1</div><div class="line">$ <span class="built_in">cd</span> ztest1</div><div class="line">$ git submodule add ../sub.git sub</div></pre></td></tr></table></figure>
+<p>这时我们可以看到 <code>ztest1</code> 目录下多了 <code>.gitmodules</code> 文件，多了 <code>sub</code> 文件夹。执行 <code>git status</code>，显示内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with <span class="string">'origin/master'</span>.</div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        new file:   .gitmodules</div><div class="line">        new file:   sub</div></pre></td></tr></table></figure>
+<p>提交修改到 <code>main.git</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ git commit -m &quot;first post&quot;</div><div class="line">[master 3fb2def] first post</div><div class="line"> 2 files changed, 4 insertions(+)</div><div class="line"> create mode 100644 .gitmodules</div><div class="line"> create mode 160000 sub</div><div class="line"></div><div class="line">$ git push origin master</div><div class="line">Counting objects: 3, done.</div><div class="line">Delta compression using up to 8 threads.</div><div class="line">Compressing objects: 100% (2/2), done.</div><div class="line">Writing objects: 100% (3/3), 353 bytes | 0 bytes/s, done.</div><div class="line">Total 3 (delta 0), reused 0 (delta 0)</div><div class="line">To E:/git-submodule-test/main.git/</div><div class="line">   607e63d..3fb2def  master -&gt; master</div></pre></td></tr></table></figure>
+<p>我们看看效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> main.git ztest2</div></pre></td></tr></table></figure>
+<p>这里可以看到 <code>main.git</code> 中的内容回来了，但是 <code>sub</code> 下面没有内容。这里我们要取回这个内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git submodule init</div><div class="line">Submodule &apos;sub&apos; (E:/git-submodule-test/sub.git) registered for path &apos;sub&apos;</div><div class="line"></div><div class="line">$ git submodule update</div><div class="line">Cloning into &apos;E:/git-submodule-test/ztest2/sub&apos;...</div><div class="line">done.</div><div class="line">Submodule path &apos;sub&apos;: checked out &apos;9f2f93760733ede5a1e30ccd4b6e0450fd60e221&apos;</div></pre></td></tr></table></figure>
+<p>到这里，我们的 <code>sub</code> 内容返回了。</p>
+<h2 id="2-4-操作子仓库"><a href="#2-4-操作子仓库" class="headerlink" title="2.4 操作子仓库"></a>2.4 操作子仓库</h2><p>上面的步骤中，我们知道怎么获取2个仓库的内容。假设下下面的场景:</p>
+<ol>
+<li><p>我自己在本地修改了 <code>sub</code> 中的内容，如何推送到服务端，这样别人可以更新</p>
+</li>
+<li><p>别人已经推送到服务端远程仓库的修改，我在这边如何同步</p>
+</li>
+</ol>
+<p>对于场景1，我们可以这样模拟，在 <code>ztest1</code> 中的 <code>sub</code> 下修改内容。我们在 <code>ztest1</code> 路径下执行下面操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with <span class="string">'origin/master'</span>.</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line">  (commit or discard the untracked or modified content <span class="keyword">in</span> submodules)</div><div class="line"></div><div class="line">        modified:   sub (modified content)</div><div class="line"></div><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">"change sub"</span></div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with <span class="string">'origin/master'</span>.</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">        modified:   sub (modified content)</div><div class="line"></div><div class="line">no changes added to commit</div></pre></td></tr></table></figure>
+<p>可以看到 <code>ztest1</code> 这个仓库操作不了 <code>sub</code> 下的内容，我们进入 <code>sub</code> 路径下执行下面操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">Your branch is up-to-date with <span class="string">'origin/master'</span>.</div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">  (use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line"></div><div class="line">        modified:   helloworld.md</div><div class="line"></div><div class="line">no changes added to commit (use <span class="string">"git add"</span> and/or <span class="string">"git commit -a"</span>)</div><div class="line"></div><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">"change sub"</span></div><div class="line">[master bf7521b] change sub</div><div class="line"> 1 file changed, 3 insertions(+), 1 deletion(-)</div><div class="line"></div><div class="line">$ git push origin master</div><div class="line">Counting objects: 3, done.</div><div class="line">Delta compression using up to 8 threads.</div><div class="line">Compressing objects: 100% (2/2), done.</div><div class="line">Writing objects: 100% (3/3), 293 bytes | 0 bytes/s, done.</div><div class="line">Total 3 (delta 0), reused 0 (delta 0)</div><div class="line">To E:/git-submodule-test/sub.git</div><div class="line">   9f2f937..bf7521b  master -&gt; master</div></pre></td></tr></table></figure>
+<p>这里我们把修改，推送到远程仓库了。下面我们在 <code>ztest2</code> 中来同步这个修改，到 <code>ztest2/sub</code> 目录下，执行操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git pull origin master</div><div class="line">From E:/git-submodule-test/sub</div><div class="line"> * branch            master     -&gt; FETCH_HEAD</div><div class="line">Updating 9f2f937..bf7521b</div><div class="line">Fast-forward</div><div class="line"> helloworld.md | 4 +++-</div><div class="line"> 1 file changed, 3 insertions(+), 1 deletion(-)</div></pre></td></tr></table></figure>
+<p>这里看到同步了。</p>
+<h1 id="3-结果说明"><a href="#3-结果说明" class="headerlink" title="3. 结果说明"></a>3. 结果说明</h1><p>使用 <code>git submodule</code> 虽然管理了多个子仓库，但是每个子仓库的操作都是各自操作。唯一和一般的仓库使用区别是，在 <code>git clone</code> 主仓库后，我们需要执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git submodule init</div><div class="line">$ git submodule update</div></pre></td></tr></table></figure>
+<p>操作来更新我们子项目代码内容，其他的没有什么区别。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/创建自己的 github.io 站点页面/" rel="next" title="创建自己的 github.io 站点页面">
+                <i class="fa fa-chevron-left"></i> 创建自己的 github.io 站点页面
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/04/git-submodule-测试/"
+           data-title="git submodule 测试" data-url="http://kuangcaibao.github.io/2017/03/04/git-submodule-测试/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://om52qmmoc.bkt.clouddn.com/Koala.jpg"
+               alt="Kuang Caibao" />
+          <p class="site-author-name" itemprop="name">Kuang Caibao</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个 Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试-git-submodule-工作现象"><span class="nav-text">2. 测试 git submodule 工作现象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-裸仓库和一般仓库的区别"><span class="nav-text">2.1 裸仓库和一般仓库的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-创建2个裸仓库，并向仓库推送修改"><span class="nav-text">2.2 创建2个裸仓库，并向仓库推送修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-从主仓库开始"><span class="nav-text">2.3 从主仓库开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-操作子仓库"><span class="nav-text">2.4 操作子仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-结果说明"><span class="nav-text">3. 结果说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kuang Caibao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"kuangcaibao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
