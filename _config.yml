@@ -73,3 +73,31 @@ deploy:
 
 # 评论系统
 duoshuo_shortname: kuangcaibao
+duoshuo_share: true
+
+links_title: Links
+links:
+  Hexo: https://hexo.io/docs/
+  next: http://theme-next.iissnan.com/theme-settings.html#blogroll
+	七牛: http://www.qiniu.com/
+
+# plugins:
+# 	- hexo-qiniu-sync
+
+qiniu:
+  offline: false
+  sync: true
+  bucket: clstore
+  secret_file: sec/qn.json
+  dirPrefix: 
+  urlPrefix: http://om52qmmoc.bkt.clouddn.com
+  up_host: http://upload.qiniu.com
+  local_dir: static
+  update_exist: true
+  image: 
+    folder: images
+    extend: 
+  js:
+    folder: js
+  css:
+    folder: css

@@ -219,3 +219,5 @@ $ git submodule init
 $ git submodule update
 ```
 操作来更新我们子项目代码内容，其他的没有什么区别。
+
+{% qnimg cl.jpg title:cl alt:waiting  %}

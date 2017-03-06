@@ -103,6 +103,16 @@ deploy:
 
 在 [七牛](http://www.qiniu.com/) 上注册账号，开始操作，操作方式自行 `google`。
 
+这种方式的弊端，就是使用图片前，要把图片上传到七牛空间，然后获取到资源链接，在 `markdown` 文本中使用 `![]()` 这种方式引用。这种过程都是手动完成，繁琐不方便，有没有好的方法???
+
+[点这里!](http://www.jianshu.com/p/c2ba9533088a)
+
+[再点击这里!!!](https://www.npmjs.com/package/hexo-qiniu-sync)
+
+使用第2种方式，虽然配置有些复杂，但是要比方式1方便很多，好处自己体会！！！
+
+使用方式2有个坑，试试吧。解释[点击这里](https://github.com/gyk001/hexo-qiniu-sync/issues/41)
+
 
 # 6. Q & A
 
@@ -118,3 +128,7 @@ fatal: Pathspec 'themes/next/_config.yml' is in submodule 'themes/next'
 ```
 
 看看 `git` 中 `submodule` 是个概念，[解释](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+
+具体的 `git submodule` 解释，[点击这里](https://kuangcaibao.github.io/2017/03/04/git-submodule-%E6%B5%8B%E8%AF%95/#more)
+
+{% qnimg cl.jpg title:cl alt:waiting  %}
