@@ -93,10 +93,12 @@
 <meta property="og:url" content="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/index.html">
 <meta property="og:site_name" content="Kuang Caibao's Notes">
 <meta property="og:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
-<meta property="og:updated_time" content="2017-03-04T01:45:24.519Z">
+<meta property="og:image" content="http://om52qmmoc.bkt.clouddn.com/images/cl.jpg">
+<meta property="og:updated_time" content="2017-03-06T14:56:33.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建自己的 github.io 站点页面">
 <meta name="twitter:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
+<meta name="twitter:image" content="http://om52qmmoc.bkt.clouddn.com/images/cl.jpg">
 
 
 
@@ -227,6 +229,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -405,7 +417,17 @@
 <h1 id="5-hexo-theme-next-继承第三方服务"><a href="#5-hexo-theme-next-继承第三方服务" class="headerlink" title="5. hexo-theme-next 继承第三方服务"></a>5. hexo-theme-next 继承第三方服务</h1><h2 id="5-1-评论系统"><a href="#5-1-评论系统" class="headerlink" title="5.1 评论系统"></a>5.1 评论系统</h2><p>这里选择 <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system" target="_blank" rel="external">官方文档</a> 中推荐的 <a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>。然后按照文档说明，注册信息和在站点配置文件中配置对应的内容就可以了。</p>
 <h2 id="5-2-图片存储服务"><a href="#5-2-图片存储服务" class="headerlink" title="5.2 图片存储服务"></a>5.2 图片存储服务</h2><p>如果把 <code>blog</code> 中图片资源也放到 <code>github</code> 中，很容易把 <code>github</code> 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。</p>
 <p>在 <a href="http://www.qiniu.com/" target="_blank" rel="external">七牛</a> 上注册账号，开始操作，操作方式自行 <code>google</code>。</p>
-
+<p>这种方式的弊端，就是使用图片前，要把图片上传到七牛空间，然后获取到资源链接，在 <code>markdown</code> 文本中使用 <code>![]()</code> 这种方式引用。这种过程都是手动完成，繁琐不方便，有没有好的方法???</p>
+<p><a href="http://www.jianshu.com/p/c2ba9533088a" target="_blank" rel="external">点这里!</a></p>
+<p><a href="https://www.npmjs.com/package/hexo-qiniu-sync" target="_blank" rel="external">再点击这里!!!</a></p>
+<p>使用第2种方式，虽然配置有些复杂，但是要比方式1方便很多，好处自己体会！！！</p>
+<p>使用方式2有个坑，试试吧。解释<a href="https://github.com/gyk001/hexo-qiniu-sync/issues/41" target="_blank" rel="external">点击这里</a></p>
+<h1 id="6-Q-amp-A"><a href="#6-Q-amp-A" class="headerlink" title="6. Q &amp; A"></a>6. Q &amp; A</h1><h2 id="6-1-next-主题修改配置的同步问题"><a href="#6-1-next-主题修改配置的同步问题" class="headerlink" title="6.1 next 主题修改配置的同步问题"></a>6.1 next 主题修改配置的同步问题</h2><p>在使用 <code>hexo</code> 的时候引入 <code>next</code> 主题，这个是从另外一个项目中 <code>clone</code> 过来的。我们修改主题配置文件的时候，在根目录下执行 <code>git status</code> 会检查到 <code>themes/next</code> 下有变化，但是一套 <code>git</code> 操作下来，会发现我们的远程仓库中 <code>themes/next</code> 下的文件夹是空的，没有同步过去。</p>
+<p>我们手动来添加我们修改的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; git add themes/next/_config.yml</div><div class="line">fatal: Pathspec <span class="string">'themes/next/_config.yml'</span> is <span class="keyword">in</span> submodule <span class="string">'themes/next'</span></div></pre></td></tr></table></figure>
+<p>看看 <code>git</code> 中 <code>submodule</code> 是个概念，<a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97" target="_blank" rel="external">解释</a></p>
+<p>具体的 <code>git submodule</code> 解释，<a href="https://kuangcaibao.github.io/2017/03/04/git-submodule-%E6%B5%8B%E8%AF%95/#more">点击这里</a></p>
+<img title="cl" alt="waiting" src="http://om52qmmoc.bkt.clouddn.com/images/cl.jpg">
       
     </div>
 
@@ -463,6 +485,25 @@
 
 
     <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/"
+     data-title="创建自己的 github.io 站点页面"
+     data-content=""
+     data-url="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
     </div>
   </div>
@@ -562,6 +603,28 @@
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo" target="_blank">Hexo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/theme-settings.html#blogroll" title="next" target="_blank">next</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qiniu.com/" title="七牛" target="_blank">七牛</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
         
 
@@ -578,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-为什么使用-github-io-提供的静态页面服务写-blog"><span class="nav-text">1. 为什么使用 github.io 提供的静态页面服务写 blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用-hexo-来创建一个-github-pages"><span class="nav-text">2. 使用 hexo 来创建一个 github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-将-hexo-的主题换为-next"><span class="nav-text">3. 将 hexo 的主题换为 next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-多端同步我们的内容"><span class="nav-text">4. 多端同步我们的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-hexo-theme-next-继承第三方服务"><span class="nav-text">5. hexo-theme-next 继承第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-评论系统"><span class="nav-text">5.1 评论系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-图片存储服务"><span class="nav-text">5.2 图片存储服务</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-为什么使用-github-io-提供的静态页面服务写-blog"><span class="nav-text">1. 为什么使用 github.io 提供的静态页面服务写 blog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-使用-hexo-来创建一个-github-pages"><span class="nav-text">2. 使用 hexo 来创建一个 github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-将-hexo-的主题换为-next"><span class="nav-text">3. 将 hexo 的主题换为 next</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-多端同步我们的内容"><span class="nav-text">4. 多端同步我们的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-hexo-theme-next-继承第三方服务"><span class="nav-text">5. hexo-theme-next 继承第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-评论系统"><span class="nav-text">5.1 评论系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-图片存储服务"><span class="nav-text">5.2 图片存储服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Q-amp-A"><span class="nav-text">6. Q & A</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-next-主题修改配置的同步问题"><span class="nav-text">6.1 next 主题修改配置的同步问题</span></a></li></ol></li></ol></div>
             
 
           </div>
