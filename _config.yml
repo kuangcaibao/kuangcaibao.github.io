@@ -77,8 +77,8 @@ deploy:
   repo: git@github.com:kuangcaibao/kuangcaibao.github.io.git
 
 # 评论系统
-duoshuo_shortname: kuangcaibao
-duoshuo_share: true
+# duoshuo_shortname: kuangcaibao
+# duoshuo_share: true
 
 links_title: Links
 links:

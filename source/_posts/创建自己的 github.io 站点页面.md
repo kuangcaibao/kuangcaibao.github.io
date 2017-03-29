@@ -97,6 +97,22 @@ deploy:
 
 这里选择 [官方文档](http://theme-next.iissnan.com/third-party-services.html#comment-system) 中推荐的 [多说](http://duoshuo.com/)。然后按照文档说明，注册信息和在站点配置文件中配置对应的内容就可以了。
 
+---
+
+最近多说评论系统要被关闭了，现在把评论系统切换到 `Disqus` 上。切换步骤：
+
+1. 在 [Disqus 官网](https://disqus.com/) 上注册一个账号
+
+2. 然后进入个人设置中心，选择 `add disqus to site` 进入 `install disqus` 页面
+
+3. 选择选项 `i want to install disqus on my site`
+
+4. 按照提示创建
+
+5. 创建成功后，然后根据 [hexo-theme-next](http://theme-next.iissnan.com/third-party-services.html#comment-system) 介绍配置，在 `主题配置文件` 中把这个打开。
+
+到此，评论系统配置成功。不过不能微信，QQ 登录，这个有点伤。
+
 ## 5.2 图片存储服务
 
 如果把 `blog` 中图片资源也放到 `github` 中，很容易把 `github` 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。
