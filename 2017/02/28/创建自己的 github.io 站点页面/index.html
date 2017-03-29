@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Kuang Caibao's Notes">
 <meta property="og:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
 <meta property="og:image" content="http://om52qmmoc.bkt.clouddn.com/images/cl.jpg">
-<meta property="og:updated_time" content="2017-03-06T14:56:33.756Z">
+<meta property="og:updated_time" content="2017-03-29T14:42:37.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建自己的 github.io 站点页面">
 <meta name="twitter:description" content="1. 为什么使用 github.io 提供的静态页面服务写 blog  三方网站（如 oschina.net, segmentfault.com, csdn.net 等）提供的 blog 系统，虽然可以记录 blog。因为托管在第三方，经常容易忘记，然后就没有然后了。github.com 是一个免费的代码托管平台，可以托管你的代码和平常的记录，支持markdown 语法记录，非常方便。 但是在 g">
@@ -111,7 +111,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -349,7 +349,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/02/28/创建自己的 github.io 站点页面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/28/创建自己的 github.io 站点页面/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -415,6 +415,21 @@
 <p>这样，使用命令 <code>hexo deploy</code> 只是将生成的静态页面文件 <code>push</code> 到了我们的仓库中。实际的源文件，没有处理。</p>
 <p>所以这里，我们需要把我们的源文件，就是工程文件也上传到 <code>github</code> 中。理解了这个过程，那么我们就好管理了，不管是再新建一个仓库，来存放这些文件。还是在 <code>github pages</code> 的那个仓库下建一个分支来存放文件，都行。</p>
 <h1 id="5-hexo-theme-next-继承第三方服务"><a href="#5-hexo-theme-next-继承第三方服务" class="headerlink" title="5. hexo-theme-next 继承第三方服务"></a>5. hexo-theme-next 继承第三方服务</h1><h2 id="5-1-评论系统"><a href="#5-1-评论系统" class="headerlink" title="5.1 评论系统"></a>5.1 评论系统</h2><p>这里选择 <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system" target="_blank" rel="external">官方文档</a> 中推荐的 <a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>。然后按照文档说明，注册信息和在站点配置文件中配置对应的内容就可以了。</p>
+<hr>
+<p>最近多说评论系统要被关闭了，现在把评论系统切换到 <code>Disqus</code> 上。切换步骤：</p>
+<ol>
+<li><p>在 <a href="https://disqus.com/" target="_blank" rel="external">Disqus 官网</a> 上注册一个账号</p>
+</li>
+<li><p>然后进入个人设置中心，选择 <code>add disqus to site</code> 进入 <code>install disqus</code> 页面</p>
+</li>
+<li><p>选择选项 <code>i want to install disqus on my site</code></p>
+</li>
+<li><p>按照提示创建</p>
+</li>
+<li><p>创建成功后，然后根据 <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system" target="_blank" rel="external">hexo-theme-next</a> 介绍配置，在 <code>主题配置文件</code> 中把这个打开。</p>
+</li>
+</ol>
+<p>到此，评论系统配置成功。不过不能微信，QQ 登录，这个有点伤。</p>
 <h2 id="5-2-图片存储服务"><a href="#5-2-图片存储服务" class="headerlink" title="5.2 图片存储服务"></a>5.2 图片存储服务</h2><p>如果把 <code>blog</code> 中图片资源也放到 <code>github</code> 中，很容易把 <code>github</code> 的免费空间耗完。所以这里把文件上传到第三方云存储上去，直接引用链接。</p>
 <p>在 <a href="http://www.qiniu.com/" target="_blank" rel="external">七牛</a> 上注册账号，开始操作，操作方式自行 <code>google</code>。</p>
 <p>这种方式的弊端，就是使用图片前，要把图片上传到七牛空间，然后获取到资源链接，在 <code>markdown</code> 文本中使用 <code>![]()</code> 这种方式引用。这种过程都是手动完成，繁琐不方便，有没有好的方法???</p>
@@ -486,25 +501,6 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/"
-     data-title="创建自己的 github.io 站点页面"
-     data-content=""
-     data-url="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -516,8 +512,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/28/创建自己的 github.io 站点页面/"
-           data-title="创建自己的 github.io 站点页面" data-url="http://kuangcaibao.github.io/2017/02/28/创建自己的 github.io 站点页面/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -766,32 +765,38 @@
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"kuangcaibao"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
   
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+    <script type="text/javascript">
+      var disqus_shortname = 'kuangcaibao';
+      var disqus_identifier = '2017/02/28/创建自己的 github.io 站点页面/';
+
+      var disqus_title = "创建自己的 github.io 站点页面";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
   
-
-
-
 
 
 
