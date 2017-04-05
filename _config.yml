@@ -106,3 +106,17 @@ qiniu:
     folder: js
   css:
     folder: css
+
+# seo 优化配置
+sitemap:
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml
+
+# 本地查询功能添加
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
