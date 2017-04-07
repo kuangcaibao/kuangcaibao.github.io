@@ -220,4 +220,348 @@ $ git submodule update
 ```
 操作来更新我们子项目代码内容，其他的没有什么区别。
 
+---
+2017-04-07
+
+具有 `submodule` 的仓库，当我们 `clone` 主仓库后，执行
+
+```
+> git submodule init
+> git submodule update
+```
+
+操作后，这里会自动同步子仓库内容，当然不是同步远程的子仓库内容。这个说法是什么意思呢？
+
+我们操作子仓库，然后经过 `git commit` 后会生成一个版本号，这个版本号我们需要在主仓库中也要 `git commit` 一次。这个时候，主仓库会记录子仓库中他需要的版本号。所以执行 `git submodule update` 操作，这个时候其实做的操作是拿着主仓库中记录的子仓库的版本号，去把对应的子仓库版本下载下来。
+
+怎么理解？
+
+# 4. 再总结
+
+## 4.1 git submodule update 报错
+
+我们执行 `git clone` 把主仓库克隆下来，然后按照教程顺序执行 `git submodule init` 和 `git submodule update` 操作，这个时候，可能会提示 `ref` 和子版本的引用不一致，导致下载子仓库失败。为什么？？？
+
+> 我在子仓库中的修改，没有 push 到远程仓库中，导致在另一个机器上克隆时，会发现远程子仓库中的版本和主仓库中记录的版本，不一致，准确的说是不存在。所以那个版本的内容没有，导致下载失败。 
+
+## 4.2 测试示例
+
+```
+kcb@kcb-PC MINGW64 /e
+$ mkdir git-submodule-test
+
+kcb@kcb-PC MINGW64 /e
+$ cd git-submodule-test/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ mkdir main
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd main
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/main
+$ git init
+Initialized empty Git repository in E:/git-submodule-test/main/.git/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/main (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ mkdir sub
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd sub
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/sub
+$ git init
+Initialized empty Git repository in E:/git-submodule-test/sub/.git/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/sub (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ git clone --bare main/ main.git
+Cloning into bare repository 'main.git'...
+warning: You appear to have cloned an empty repository.
+done.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ git clone --bare sub/ sub.git
+Cloning into bare repository 'sub.git'...
+warning: You appear to have cloned an empty repository.
+done.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd main
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/main (master)
+$ git remote -v
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/main (master)
+$ git remote add origin ../main.git
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/main (master)
+$ git remote -v
+origin  ../main.git (fetch)
+origin  ../main.git (push)
+
+```
+
+至此，我们建立了 2 个裸仓库，并且各自有一个仓库来提交修改。我们在 main 和 sub 中分别添加内容，然后提交到本地仓库同时推送到远程仓库中，这里是 main.git 和 sub.git。
+
+建立第一个带 sub 的实例。
+
+```
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ git clone main.git/ ztest1
+Cloning into 'ztest1'...
+done.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd ztest1/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git submodule add ../sub.git sub
+Cloning into 'E:/git-submodule-test/ztest1/sub'...
+done.
+warning: LF will be replaced by CRLF in .gitmodules.
+The file will have its original line endings in your working directory.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   .gitmodules
+        new file:   sub
+
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git commit -m "ztest1 添加 sub"
+[master f416ded] ztest1 添加 sub
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 sub
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+
+```
+
+至此，ztest1 中的文件结构
+
+```
+/ztest1
+  .gitmodules
+  main.txt
+  /sub
+    sub.txt
+```
+
+2 个仓库的内容都克隆下来了。我们在 ztest1 中修改 main.txt 和 sub.txt 内容。
+
+```
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+        modified:   main.txt
+        modified:   sub (modified content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   main.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+        modified:   sub (modified content)
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git commit -m "ztest1 main.txt change"
+[master 7ece350] ztest1 main.txt change
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+
+        modified:   sub (modified content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ cd sub/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ git add .
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   sub.txt
+
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ git commit -m "ztest1 sub.txt change"
+[master 22d4842] ztest1 sub.txt change
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   sub (new commits)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git add .
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   sub
+
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git commit -m "ztest1 main submit sub"
+[master ca2a14b] ztest1 main submit sub
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ git push origin master
+Counting objects: 8, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 917 bytes | 0 bytes/s, done.
+Total 8 (delta 1), reused 0 (delta 0)
+To E:/git-submodule-test/main.git/
+   ef7567f..ca2a14b  master -> master
+
+
+```
+
+这里我们只是在 ztest1 下把内容推送到 mian.git 中了。我们这里执行下面操作
+
+```
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ git clone main.git ztest2
+Cloning into 'ztest2'...
+done.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd ztest2
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest2 (master)
+$ git submodule init
+Submodule 'sub' (E:/git-submodule-test/sub.git) registered for path 'sub'
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest2 (master)
+$ git submodule update
+Cloning into 'E:/git-submodule-test/ztest2/sub'...
+done.
+Fetched in submodule path 'sub', but it did not contain 22d484273b4dca3fe105251fde9885af436d73ac. Direct fetching of that commit failed.
+
+```
+
+> 这里看到的提示信息是什么，sub 中不包含版本 `22d484273b4dca3fe105251fde9885af436d73ac`。失败了，这个是因为我们没有把我们的 sub 修改推送到 sub 中。
+
+```
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest2 (master)
+$ cd ../ztest1/sub/
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ git push origin master
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To E:/git-submodule-test/sub.git
+   d3386e7..22d4842  master -> master
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1/sub (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest1 (master)
+$ cd ../
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ git clone main.git ztest3
+Cloning into 'ztest3'...
+done.
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test
+$ cd ztest3
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest3 (master)
+$ git submodule update
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest3 (master)
+$ git submodule init
+Submodule 'sub' (E:/git-submodule-test/sub.git) registered for path 'sub'
+
+kcb@kcb-PC MINGW64 /e/git-submodule-test/ztest3 (master)
+$ git submodule update
+Cloning into 'E:/git-submodule-test/ztest3/sub'...
+done.
+Submodule path 'sub': checked out '22d484273b4dca3fe105251fde9885af436d73ac'
+
+```
+
+这里就可以很明白的看清楚了，主仓库中记录子仓库的版本，我们在执行 git submodule update 时，拉取的对应子仓库版本中的版本号。至此 git submodule 的表现情形测试清楚了。
+
+1. 各个版本各自更新
+
+2. 主仓库会把子仓库的修改也要 commit 一遍，主要是版本号信息
+
 {% qnimg cl.jpg title:cl alt:waiting  %}
