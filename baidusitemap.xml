@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://kuangcaibao.github.io/2017/03/04/git-submodule-%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2017-04-07T16:38:15.439Z</lastmod>
+    <data>
+        <display>
+        <title>git submodule 测试</title>
+        <pubTime>2017-03-04T02:17:29.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="工程文档" url="http://kuangcaibao.github.io/categories/%E5%B7%A5%E7%A8%8B%E6%96%87%E6%A1%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://kuangcaibao.github.io/2017/03/29/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%B9%E5%87%BA%E5%B1%82%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2017-03-29T15:23:38.058Z</lastmod>
     <data>
@@ -103,28 +125,6 @@
            
              
               <breadCrumb title="trick" url="http://kuangcaibao.github.io/categories/trick/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://kuangcaibao.github.io/2017/03/04/git-submodule-%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2017-03-06T14:50:02.411Z</lastmod>
-    <data>
-        <display>
-        <title>git submodule 测试</title>
-        <pubTime>2017-03-04T02:17:29.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="工程文档" url="http://kuangcaibao.github.io/categories/%E5%B7%A5%E7%A8%8B%E6%96%87%E6%A1%A3/"/>
           
         </display>
     </data>
