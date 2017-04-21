@@ -93,24 +93,24 @@
 
 <meta name="description" content="介绍使用 sublime text 的过程中个人认为不错的技巧
 
-1. 安装 packages下载的 sublime text3 默认是没有 install package 操作，安装这个功能。Ctrl + `  打开控制台，然后输入：
-1import urllib.request,os,hashlib; h = &amp;apos;df21e130d211cfc94d9b0905775a7c0f&amp;ap">
+sublime-text3 中，程序默认装了一些 packages，放在安装目录下的 packages 下。然后我们后续安装的包，会放在 Preferences -&amp;gt; Browse Packages... 打开的目录下。
+这里的包一般都是 [包名].sublime-package，这里可以用压缩文件打开，会发现里面有配置文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sublime-text 使用记录">
 <meta property="og:url" content="http://kuangcaibao.github.io/2017/04/11/sublime-text-使用记录/index.html">
 <meta property="og:site_name" content="Kuang Caibao's Notes">
 <meta property="og:description" content="介绍使用 sublime text 的过程中个人认为不错的技巧
 
-1. 安装 packages下载的 sublime text3 默认是没有 install package 操作，安装这个功能。Ctrl + `  打开控制台，然后输入：
-1import urllib.request,os,hashlib; h = &amp;apos;df21e130d211cfc94d9b0905775a7c0f&amp;ap">
+sublime-text3 中，程序默认装了一些 packages，放在安装目录下的 packages 下。然后我们后续安装的包，会放在 Preferences -&amp;gt; Browse Packages... 打开的目录下。
+这里的包一般都是 [包名].sublime-package，这里可以用压缩文件打开，会发现里面有配置文件">
 <meta property="og:image" content="http://om52qmmoc.bkt.clouddn.com/images/sublime-packages-dir.png">
-<meta property="og:updated_time" content="2017-04-19T15:00:08.112Z">
+<meta property="og:updated_time" content="2017-04-21T13:43:58.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sublime-text 使用记录">
 <meta name="twitter:description" content="介绍使用 sublime text 的过程中个人认为不错的技巧
 
-1. 安装 packages下载的 sublime text3 默认是没有 install package 操作，安装这个功能。Ctrl + `  打开控制台，然后输入：
-1import urllib.request,os,hashlib; h = &amp;apos;df21e130d211cfc94d9b0905775a7c0f&amp;ap">
+sublime-text3 中，程序默认装了一些 packages，放在安装目录下的 packages 下。然后我们后续安装的包，会放在 Preferences -&amp;gt; Browse Packages... 打开的目录下。
+这里的包一般都是 [包名].sublime-package，这里可以用压缩文件打开，会发现里面有配置文件">
 <meta name="twitter:image" content="http://om52qmmoc.bkt.clouddn.com/images/sublime-packages-dir.png">
 
 
@@ -444,6 +444,8 @@
         <blockquote>
 <p>介绍使用 sublime text 的过程中个人认为不错的技巧</p>
 </blockquote>
+<p><strong><code>sublime-text3</code> 中，程序默认装了一些 packages，放在安装目录下的 <code>packages</code> 下。然后我们后续安装的包，会放在 <code>Preferences -&gt; Browse Packages...</code> 打开的目录下。</strong></p>
+<p><strong>这里的包一般都是 <code>[包名].sublime-package</code>，这里可以用压缩文件打开，会发现里面有配置文件。我们可以修改那里的配置文件，来达到我们配置包的目的。</strong></p>
 <h1 id="1-安装-packages"><a href="#1-安装-packages" class="headerlink" title="1. 安装 packages"></a>1. 安装 packages</h1><p>下载的 <code>sublime text3</code> 默认是没有 <code>install package</code> 操作，安装这个功能。<code>Ctrl + ` </code> 打开控制台，然后输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)</div></pre></td></tr></table></figure>
 <h2 id="1-1-tab-占位大小设置"><a href="#1-1-tab-占位大小设置" class="headerlink" title="1.1 tab 占位大小设置"></a>1.1 tab 占位大小设置</h2><p><code>tab</code> 大小默认为 4 个空格，这里我习惯设置 <code>tab</code> 为 2 个空格大小。<code>preferences -&gt; settings</code> 打开文件 <code>Preferences.sublime-settings User</code> 并添加内容</p>
@@ -456,9 +458,9 @@
 <ol>
 <li><p><code>ctrl + shift + p</code> 进入 package control 控制输入框</p>
 </li>
-<li><p>输入你要安装的 package，等待安装完成</p>
+<li><p>输入你要安装的 <code>package</code> 名称，等待安装完成</p>
 </li>
-<li><p>配置 package</p>
+<li><p>配置 <code>package</code></p>
 </li>
 </ol>
 <h2 id="3-1-OmniMarkupPreviewer"><a href="#3-1-OmniMarkupPreviewer" class="headerlink" title="3.1 OmniMarkupPreviewer"></a>3.1 OmniMarkupPreviewer</h2><p>markdown 预览插件。 </p>
@@ -470,6 +472,14 @@
 <img title="sublime 安装包路径截图" alt="sublime-package-dir" src="http://om52qmmoc.bkt.clouddn.com/images/sublime-packages-dir.png">
 <p>这里看到没有我们安装的 Nodejs，找不到。上一级目录下有个 <code>Installed Packages</code> 目录中会发现 <code>Nodejs.sublime-package</code> 文件，我们解压这个文件，会发现有文件 <code>Nodejs.sublime-build</code>，我们修改其中的内容，把 <code>encoding</code> 值改为 <code>utf8</code>。重启 <code>sublime text</code>，会发现我们的编码问题解决。</p>
 <p>网上还有需要改 <code>cmd</code> 这些配置，个人猜想可能是 <code>path</code> 环境路径中没有加入 <code>nodejs</code> 的安装目录，导致 shell 执行 <code>node $file</code> 会报错，但是这里我们安装 <code>nodejs</code> 的时候，这些环境都安装了，所以可以执行了。</p>
+<h2 id="3-3-运行-Java"><a href="#3-3-运行-Java" class="headerlink" title="3.3 运行 Java"></a>3.3 运行 Java</h2><p>我们在 <code>sublime-text3</code> 中看到了 <code>build</code> 项中有 <code>java</code>。我们写一个 <code>Test.java</code> 文件，然后执行 <code>ctrl + b</code> 命令，可以看到在 <code>java</code> 文件对应的目录下生成了一个 <code>class</code> 文件，但是这里我们缺少输出。</p>
+<p>修改 <code>C:\Program Files\Sublime Text 3\Packages\Java.sublime-package</code> 中的 <code>JavaC.sublime-build</code> 文件。内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  - &quot;shell_cmd&quot;: &quot;javac \&quot;$file\&quot;&quot;,</div><div class="line">  + &quot;shell_cmd&quot;: &quot;runJava.bat \&quot;$file\&quot;&quot;,</div><div class="line">  &quot;file_regex&quot;: &quot;^(...*?):([0-9]*):?([0-9]*)&quot;,</div><div class="line">  &quot;selector&quot;: &quot;source.java&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>代码中前面的 <code>-</code> 表示删除那一行，<code>+</code> 表示添加那一行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// runJava.bat</div><div class="line"></div><div class="line">@ECHO OFF</div><div class="line">cd %~dp1</div><div class="line">IF EXIST %~n1.class (</div><div class="line">DEL %~n1.class</div><div class="line">)</div><div class="line">javac -encoding UTF-8 %~nx1</div><div class="line">IF EXIST %~n1.class (</div><div class="line">java %~n1</div><div class="line">)</div></pre></td></tr></table></figure>
+<p><a href="http://www.jianshu.com/p/58bf9e4d5b32#" target="_blank" rel="external">具体做法参考</a></p>
 <h1 id="4-附录：一些问题"><a href="#4-附录：一些问题" class="headerlink" title="4. 附录：一些问题"></a>4. 附录：一些问题</h1><h2 id="4-1-package-install-报错"><a href="#4-1-package-install-报错" class="headerlink" title="4.1 package install 报错"></a>4.1 package install 报错</h2><p>报错信息为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Package Control: Error downloading channel. URL error unknown error (_ssl.c:2228) downloading https://packagecontrol.io/channel_v3.json</div></pre></td></tr></table></figure>
 <p>fixed: </p>
@@ -672,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-安装-packages"><span class="nav-text">1. 安装 packages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-tab-占位大小设置"><span class="nav-text">1.1 tab 占位大小设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-快捷键"><span class="nav-text">2. 快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-不错的-packages"><span class="nav-text">3. 不错的 packages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-OmniMarkupPreviewer"><span class="nav-text">3.1 OmniMarkupPreviewer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Nodejs"><span class="nav-text">3.2 Nodejs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-附录：一些问题"><span class="nav-text">4. 附录：一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-package-install-报错"><span class="nav-text">4.1 package install 报错</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-安装-packages"><span class="nav-text">1. 安装 packages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-tab-占位大小设置"><span class="nav-text">1.1 tab 占位大小设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-快捷键"><span class="nav-text">2. 快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-不错的-packages"><span class="nav-text">3. 不错的 packages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-OmniMarkupPreviewer"><span class="nav-text">3.1 OmniMarkupPreviewer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Nodejs"><span class="nav-text">3.2 Nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-运行-Java"><span class="nav-text">3.3 运行 Java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-附录：一些问题"><span class="nav-text">4. 附录：一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-package-install-报错"><span class="nav-text">4.1 package install 报错</span></a></li></ol></li></ol></div>
             
 
           </div>
